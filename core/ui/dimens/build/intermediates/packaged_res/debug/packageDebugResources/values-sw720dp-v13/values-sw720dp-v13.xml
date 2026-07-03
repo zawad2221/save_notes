@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="default_spacing_0dp">0dp</dimen>
+    <dimen name="default_spacing_10dp">20dp</dimen>
+    <dimen name="default_spacing_12dp">24dp</dimen>
+    <dimen name="default_spacing_14dp">28dp</dimen>
+    <dimen name="default_spacing_16dp">32dp</dimen>
+    <dimen name="default_spacing_18dp">36dp</dimen>
+    <dimen name="default_spacing_1dp">1dp</dimen>
+    <dimen name="default_spacing_20dp">40dp</dimen>
+    <dimen name="default_spacing_22dp">44dp</dimen>
+    <dimen name="default_spacing_24dp">48dp</dimen>
+    <dimen name="default_spacing_26dp">52dp</dimen>
+    <dimen name="default_spacing_28dp">56dp</dimen>
+    <dimen name="default_spacing_2dp">4dp</dimen>
+    <dimen name="default_spacing_30dp">60dp</dimen>
+    <dimen name="default_spacing_32dp">64dp</dimen>
+    <dimen name="default_spacing_4dp">8dp</dimen>
+    <dimen name="default_spacing_6dp">12dp</dimen>
+    <dimen name="default_spacing_8dp">16dp</dimen>
+    <dimen name="default_text_size_10sp">20sp</dimen>
+    <dimen name="default_text_size_12sp">24sp</dimen>
+    <dimen name="default_text_size_14sp">28sp</dimen>
+    <dimen name="default_text_size_16sp">32sp</dimen>
+    <dimen name="default_text_size_18sp">36sp</dimen>
+    <dimen name="default_text_size_20sp">40sp</dimen>
+    <dimen name="default_text_size_22sp">44sp</dimen>
+    <dimen name="default_text_size_24sp">48sp</dimen>
+    <dimen name="default_text_size_26sp">52sp</dimen>
+    <dimen name="default_text_size_28sp">56sp</dimen>
+    <dimen name="default_text_size_30sp">60sp</dimen>
+    <dimen name="default_text_size_32sp">64sp</dimen>
+    <dimen name="default_text_size_8sp">16sp</dimen>
+</resources>

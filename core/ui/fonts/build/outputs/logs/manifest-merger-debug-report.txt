@@ -1,0 +1,16 @@
+-- Merging decision tree log ---
+manifest
+ADDED from /Users/zawadhossain/AndroidStudioProjects/SaveNotes/core/ui/fonts/build/intermediates/tmp/ProcessLibraryManifest/debug/tempAndroidManifest7101701891598896688.xml:2:13-83
+INJECTED from /Users/zawadhossain/AndroidStudioProjects/SaveNotes/core/ui/fonts/build/intermediates/tmp/ProcessLibraryManifest/debug/tempAndroidManifest7101701891598896688.xml:2:13-83
+	package
+		INJECTED from /Users/zawadhossain/AndroidStudioProjects/SaveNotes/core/ui/fonts/build/intermediates/tmp/ProcessLibraryManifest/debug/tempAndroidManifest7101701891598896688.xml
+	xmlns:android
+		ADDED from /Users/zawadhossain/AndroidStudioProjects/SaveNotes/core/ui/fonts/build/intermediates/tmp/ProcessLibraryManifest/debug/tempAndroidManifest7101701891598896688.xml:2:23-81
+uses-sdk
+INJECTED from /Users/zawadhossain/AndroidStudioProjects/SaveNotes/core/ui/fonts/build/intermediates/tmp/ProcessLibraryManifest/debug/tempAndroidManifest7101701891598896688.xml reason: use-sdk injection requested
+INJECTED from /Users/zawadhossain/AndroidStudioProjects/SaveNotes/core/ui/fonts/build/intermediates/tmp/ProcessLibraryManifest/debug/tempAndroidManifest7101701891598896688.xml
+INJECTED from /Users/zawadhossain/AndroidStudioProjects/SaveNotes/core/ui/fonts/build/intermediates/tmp/ProcessLibraryManifest/debug/tempAndroidManifest7101701891598896688.xml
+	android:targetSdkVersion
+		INJECTED from /Users/zawadhossain/AndroidStudioProjects/SaveNotes/core/ui/fonts/build/intermediates/tmp/ProcessLibraryManifest/debug/tempAndroidManifest7101701891598896688.xml
+	android:minSdkVersion
+		INJECTED from /Users/zawadhossain/AndroidStudioProjects/SaveNotes/core/ui/fonts/build/intermediates/tmp/ProcessLibraryManifest/debug/tempAndroidManifest7101701891598896688.xml

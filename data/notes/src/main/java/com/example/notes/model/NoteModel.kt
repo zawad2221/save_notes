@@ -1,0 +1,8 @@
+package com.example.notes.model
+
+data class NoteModel(
+    val noteId: Int,
+    val noteTitle: String?,
+    val noteContent: String?,
+) {
+}

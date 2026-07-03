@@ -22,6 +22,12 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "Save Notes"
+rootProject.name = "SaveNotesRoot"
 include(":app")
- 
+include(":core:ui:design-system")
+include(":core:ui:dimens")
+include(":core:ui:fonts")
+include(":core:constants")
+include(":data:notes")
+include(":feature:notes")
+include(":base")

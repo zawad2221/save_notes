@@ -1,20 +1,18 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.compose)
+    alias(libs.plugins.hilt)
+    alias(libs.plugins.ksp)
 }
 
 android {
     namespace = "com.example.savenotes"
-    compileSdk {
-        version = release(36) {
-            minorApiLevel = 1
-        }
-    }
+    compileSdk = libs.versions.compileSdk.get().toString().toInt()
 
     defaultConfig {
         applicationId = "com.example.savenotes"
-        minSdk = 24
-        targetSdk = 36
+        minSdk = libs.versions.minSdk.get().toString().toInt()
+        targetSdk = libs.versions.targetSdk.get().toString().toInt()
         versionCode = 1
         versionName = "1.0"
 
@@ -46,6 +44,17 @@ dependencies {
     implementation(libs.androidx.compose.ui.tooling.preview)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
+
+    // Hilt
+    implementation(libs.hilt.android)
+    ksp(libs.hilt.compiler)
+    implementation(libs.androidx.hilt.navigation.compose)
+
+    //module
+    implementation(project(Modules.Core.designSystem))
+    implementation(project(Modules.Feature.notes))
+    implementation(project(Modules.base))
+
     testImplementation(libs.junit)
     androidTestImplementation(platform(libs.androidx.compose.bom))
     androidTestImplementation(libs.androidx.compose.ui.test.junit4)
