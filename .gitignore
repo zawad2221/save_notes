@@ -1,15 +1,31 @@
 *.iml
 .gradle
-/local.properties
-/.idea/caches
-/.idea/libraries
-/.idea/modules.xml
-/.idea/workspace.xml
-/.idea/navEditor.xml
-/.idea/assetWizardSettings.xml
+local.properties
+.idea/
 .DS_Store
-/build
-/captures
+build/
+captures/
 .externalNativeBuild
 .cxx
-local.properties
+*.hprof
+*.pyc
+*.class
+
+# Signing files
+*.jks
+*.keystore
+
+# Android Studio
+*.iws
+*.ipr
+
+# Generated files
+bin/
+gen/
+
+# Log files
+*.log
+
+# Sensitive info
+secrets.properties
+google-services.json
