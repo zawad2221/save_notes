@@ -1,5 +1,6 @@
 package com.example.notes.sceens
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
@@ -7,6 +8,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
@@ -22,6 +24,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.SolidColor
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -33,7 +36,8 @@ import com.example.notes.viewmodel.NoteEditViewModel
 fun NoteAddEditScreen(
     modifier: Modifier = Modifier,
     viewModel: NoteEditViewModel = hiltViewModel(),
-    noteId: Int
+    noteId: Int,
+    onBackAction: () -> Unit
 ) {
     LaunchedEffect(key1 = noteId) {
         viewModel.setSelectedNoteId(noteId)
@@ -70,7 +74,10 @@ fun NoteAddEditScreen(
                 Icon(
                     imageVector = Icons.AutoMirrored.Filled.ArrowBack,
                     tint = CustomTheme.colors.PureBlackAlpha100,
-                    modifier = Modifier.size(CustomTheme.spacing.spacing24dp),
+                    modifier = Modifier
+                        .size(CustomTheme.spacing.spacing24dp)
+                        .clip(CircleShape)
+                        .clickable(onClick = onBackAction),
                     contentDescription = null
                 )
             }

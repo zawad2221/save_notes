@@ -42,7 +42,9 @@ fun NoteNavHost(
                 val noteId = it.arguments?.getInt("noteId") ?: -1
                 NoteAddEditScreen(
                     noteId = noteId
-                )
+                ) {
+                    navController.popBackStack()
+                }
             }
         }
     }
