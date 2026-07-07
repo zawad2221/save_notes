@@ -1,6 +1,0 @@
-R_DEF: Internal format may change without notice
-local
-font open_sans_bold
-font open_sans_medium
-font open_sans_regular
-font open_sans_semi_bold

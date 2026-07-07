@@ -1,9 +1,0 @@
-com.example.core.ui.fonts-pngs-0 /Users/zawadhossain/AndroidStudioProjects/SaveNotes/core/ui/fonts/build/generated/res/pngs/debug
-com.example.core.ui.fonts-updated_navigation_xml-1 /Users/zawadhossain/AndroidStudioProjects/SaveNotes/core/ui/fonts/build/generated/updated_navigation_xml/debug
-com.example.core.ui.fonts-mergeDebugResources-2 /Users/zawadhossain/AndroidStudioProjects/SaveNotes/core/ui/fonts/build/intermediates/incremental/debug/mergeDebugResources/merged.dir
-com.example.core.ui.fonts-mergeDebugResources-3 /Users/zawadhossain/AndroidStudioProjects/SaveNotes/core/ui/fonts/build/intermediates/incremental/debug/mergeDebugResources/stripped.dir
-com.example.core.ui.fonts-debug-4 /Users/zawadhossain/AndroidStudioProjects/SaveNotes/core/ui/fonts/build/intermediates/merged_res/debug/mergeDebugResources
-com.example.core.ui.fonts-debug-5 /Users/zawadhossain/AndroidStudioProjects/SaveNotes/core/ui/fonts/build/intermediates/packaged_res/debug/packageDebugResources
-com.example.core.ui.fonts-debug-6 /Users/zawadhossain/AndroidStudioProjects/SaveNotes/core/ui/fonts/src/debug/res
-com.example.core.ui.fonts-main-7 /Users/zawadhossain/AndroidStudioProjects/SaveNotes/core/ui/fonts/src/main/res
-gradleHome-0 /Users/zawadhossain/.gradle

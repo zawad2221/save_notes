@@ -1,5 +1,0 @@
-com.example.core.ui.fonts
-font open_sans_bold
-font open_sans_medium
-font open_sans_regular
-font open_sans_semi_bold

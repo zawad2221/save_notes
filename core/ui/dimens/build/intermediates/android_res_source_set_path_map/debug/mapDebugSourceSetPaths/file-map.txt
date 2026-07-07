@@ -1,9 +1,0 @@
-com.example.core.ui.dimens-pngs-0 /Users/zawadhossain/AndroidStudioProjects/SaveNotes/core/ui/dimens/build/generated/res/pngs/debug
-com.example.core.ui.dimens-updated_navigation_xml-1 /Users/zawadhossain/AndroidStudioProjects/SaveNotes/core/ui/dimens/build/generated/updated_navigation_xml/debug
-com.example.core.ui.dimens-mergeDebugResources-2 /Users/zawadhossain/AndroidStudioProjects/SaveNotes/core/ui/dimens/build/intermediates/incremental/debug/mergeDebugResources/merged.dir
-com.example.core.ui.dimens-mergeDebugResources-3 /Users/zawadhossain/AndroidStudioProjects/SaveNotes/core/ui/dimens/build/intermediates/incremental/debug/mergeDebugResources/stripped.dir
-com.example.core.ui.dimens-debug-4 /Users/zawadhossain/AndroidStudioProjects/SaveNotes/core/ui/dimens/build/intermediates/merged_res/debug/mergeDebugResources
-com.example.core.ui.dimens-debug-5 /Users/zawadhossain/AndroidStudioProjects/SaveNotes/core/ui/dimens/build/intermediates/packaged_res/debug/packageDebugResources
-com.example.core.ui.dimens-debug-6 /Users/zawadhossain/AndroidStudioProjects/SaveNotes/core/ui/dimens/src/debug/res
-com.example.core.ui.dimens-main-7 /Users/zawadhossain/AndroidStudioProjects/SaveNotes/core/ui/dimens/src/main/res
-gradleHome-0 /Users/zawadhossain/.gradle

@@ -1,4 +1,0 @@
-int font open_sans_bold 0x0
-int font open_sans_medium 0x0
-int font open_sans_regular 0x0
-int font open_sans_semi_bold 0x0
