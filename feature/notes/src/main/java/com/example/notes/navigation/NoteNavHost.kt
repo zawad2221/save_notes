@@ -31,9 +31,14 @@ fun NoteNavHost(
             modifier = modifier.padding(paddingValues)
         ) {
             composable(route = NoteScreen.LANDING.value) {
-                NotesLandingScreen() {
-                    navController.navigate("${NoteScreen.EDIT_NOTE.value}/$it")
-                }
+                NotesLandingScreen(
+                    onNoteClicked = {
+                        navController.navigate("${NoteScreen.EDIT_NOTE.value}/$it")
+                    },
+                    onAddNoteClicked = {
+                        navController.navigate("${NoteScreen.EDIT_NOTE.value}/-1")
+                    }
+                )
             }
             composable(
                 route = "${NoteScreen.EDIT_NOTE.value}/{noteId}",

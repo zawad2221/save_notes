@@ -3,23 +3,26 @@ package com.example.notes.viewmodel
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.common.di.ApplicationScope
 import com.example.constants.NoteConstants
-import com.example.notes.model.NoteModel
+import com.example.notes.repository.NoteRepository
 import com.example.notes.state.NoteEditUiState
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.flatMapLatest
-import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class NoteEditViewModel @Inject constructor(
-    private val savedStateHandle: SavedStateHandle
+    private val savedStateHandle: SavedStateHandle,
+    private val noteRepository: NoteRepository,
+    @ApplicationScope private val applicationScope: CoroutineScope
 ) : ViewModel() {
 
     private val noteToEditId =
@@ -45,11 +48,14 @@ class NoteEditViewModel @Inject constructor(
     }
 
     fun saveOrUpdateNote(noteId: Int?, noteTitle: String, noteContent: String) {
-        //todo: save or update note
+        applicationScope.launch {
+            noteId?.takeIf { it >= 0 }?.let {
+                noteRepository.updateNote(noteId, noteTitle, noteContent)
+            } ?: run {
+                noteRepository.insertNote(title = noteTitle, content = noteContent)
+            }
+        }
     }
 
-    fun getNote(noteId: Int) = flow {
-        //todo: fetch data from repository
-        emit(NoteModel(noteId, "Text Note Title", "Test note Content"))
-    }
+    suspend fun getNote(noteId: Int) = noteRepository.getNoteById(noteId)
 }

@@ -14,14 +14,13 @@ android {
 }
 
 dependencies {
-    implementation(libs.androidx.appcompat)
     implementation(libs.androidx.core.ktx)
-    implementation(libs.material)
 
     //module
     implementation(project(Modules.Data.notes))
     implementation(project(Modules.Core.designSystem))
     implementation(project(Modules.Core.constants))
+    implementation(project(Modules.Core.common))
 
     // Hilt
     implementation(libs.hilt.android)

@@ -19,8 +19,8 @@ import com.example.design_system.theme.CustomTheme
 @Composable
 fun NoteCard(
     noteId: Int,
-    title: String,
-    content: String,
+    title: String = "",
+    content: String = "",
     isSelected: Boolean,
     onSelected: (Int) -> Unit,
     onCardClick: (Int) -> Unit

@@ -6,7 +6,7 @@ object Modules {
     }
     
     object Data {
-        const val notes = ":data:notes"
+        const val notes = ":core:data:notes"
     }
 
     object Core {
@@ -15,5 +15,7 @@ object Modules {
         const val dimens = ":core:ui:dimens"
         const val fonts = ":core:ui:fonts"
         const val constants = ":core:constants"
+        const val database = ":core:database"
+        const val common = ":core:common"
     }
 }
