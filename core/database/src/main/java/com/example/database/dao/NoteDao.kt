@@ -6,7 +6,6 @@ import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.example.database.model.NoteEntity
 import kotlinx.coroutines.flow.Flow
-import kotlin.time.Instant
 
 @Dao
 interface NoteDao {
@@ -21,8 +20,11 @@ interface NoteDao {
 
 
     @Query("UPDATE notes SET title = :title, content = :content, updatedAt = :updateAt WHERE id = :id")
-    fun updateNote(id: Int, title: String, content: String, updateAt: Instant)
+    fun updateNote(id: Int, title: String, content: String, updateAt: Long)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertNote(noteEntity: NoteEntity)
+
+    @Query("SELECT * FROM notes WHERE title LIKE '%' || :query || '%' OR content LIKE '%' || :query || '%'")
+    fun searchNotes(query: String): Flow<List<NoteEntity>>
 }

@@ -53,6 +53,7 @@ dependencies {
     //module
     implementation(project(Modules.Core.designSystem))
     implementation(project(Modules.Feature.notes))
+    implementation(project(Modules.Feature.search))
     implementation(project(Modules.base))
 
     testImplementation(libs.junit)

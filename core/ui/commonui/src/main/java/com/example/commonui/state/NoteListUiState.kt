@@ -1,4 +1,4 @@
-package com.example.notes.state
+package com.example.commonui.state
 
 import com.example.notes.model.NoteModel
 

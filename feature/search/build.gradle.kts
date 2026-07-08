@@ -6,8 +6,19 @@ plugins {
 }
 
 android {
-    namespace = "com.example.feature.notes"
+    namespace = "com.example.feature.search"
     compileSdk = libs.versions.compileSdk.get().toInt()
+
+    defaultConfig {
+        minSdk = libs.versions.minSdk.get().toInt()
+        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
+    }
+
     buildFeatures {
         compose = true
     }
@@ -16,11 +27,11 @@ android {
 dependencies {
     implementation(libs.androidx.core.ktx)
 
-    //module
-    implementation(project(Modules.Data.notes))
+    // Modules
+    implementation(project(Modules.Core.common))
     implementation(project(Modules.Core.designSystem))
     implementation(project(Modules.Core.constants))
-    implementation(project(Modules.Core.common))
+    implementation(project(Modules.Data.notes))
     implementation(project(Modules.Core.commonui))
 
     // Hilt
@@ -30,7 +41,7 @@ dependencies {
     implementation(libs.androidx.lifecycle.viewmodel.compose)
     implementation(libs.androidx.lifecycle.viewmodel.ktx)
 
-    //compose
+    // Compose
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.compose.ui)

@@ -3,8 +3,7 @@ package com.example.notes.viewmodel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.notes.repository.NoteRepository
-import com.example.notes.state.NoteEditUiState
-import com.example.notes.state.NoteListUiState
+import com.example.commonui.state.NoteListUiState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted

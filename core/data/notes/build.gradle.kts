@@ -22,7 +22,6 @@ dependencies {
 
     // modules
     implementation(project(Modules.Core.database))
-    implementation(project(Modules.Core.common))
 
     // Hilt
     implementation(libs.hilt.android)

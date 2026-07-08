@@ -2,7 +2,6 @@ package com.example.database.model
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import kotlin.time.Instant
 
 @Entity(
     tableName = "notes",
@@ -12,6 +11,6 @@ data class NoteEntity(
     val id: Int = 0,
     val title: String,
     val content: String,
-    val createdAt: Instant,
-    val updatedAt: Instant
+    val createdAt: Long,
+    val updatedAt: Long
 )

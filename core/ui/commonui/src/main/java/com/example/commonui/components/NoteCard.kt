@@ -1,4 +1,4 @@
-package com.example.notes.components
+package com.example.commonui.components
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.ExperimentalFoundationApi

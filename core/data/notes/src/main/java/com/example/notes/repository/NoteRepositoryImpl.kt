@@ -1,6 +1,6 @@
 package com.example.notes.repository
 
-import com.example.common.util.TimeUtils
+import com.example.notes.util.TimeUtils
 import com.example.database.dao.NoteDao
 import com.example.database.model.NoteEntity
 import com.example.notes.mapper.toNoteModel
@@ -31,6 +31,12 @@ class NoteRepositoryImpl @Inject constructor(
 
     override suspend fun updateNote(id: Int, title: String, content: String) {
         noteDao.updateNote(id = id, title = title, content = content, updateAt = TimeUtils.now())
+    }
+
+    override suspend fun searchNotes(query: String): Flow<List<NoteModel>> {
+        return noteDao.searchNotes(query).map { notes ->
+            notes.toNoteModelList()
+        }
     }
 
     override suspend fun insertNote(title: String, content: String) {

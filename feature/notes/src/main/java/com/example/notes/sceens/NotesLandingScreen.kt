@@ -1,27 +1,38 @@
 package com.example.notes.sceens
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.staggeredgrid.LazyVerticalStaggeredGrid
 import androidx.compose.foundation.lazy.staggeredgrid.StaggeredGridCells
 import androidx.compose.foundation.lazy.staggeredgrid.items
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
+import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.unit.dp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.design_system.theme.CustomTheme
-import com.example.notes.components.NoteCard
-import com.example.notes.state.NoteListUiState
+import com.example.commonui.noteGridItems
+import com.example.commonui.state.NoteListUiState
 import com.example.notes.viewmodel.NotesViewModel
 
 @Composable
@@ -29,7 +40,8 @@ fun NotesLandingScreen(
     modifier: Modifier = Modifier,
     viewModel: NotesViewModel = hiltViewModel(),
     onNoteClicked: (Int) -> Unit = {},
-    onAddNoteClicked: () -> Unit = {}
+    onAddNoteClicked: () -> Unit = {},
+    onSearchClicked: () -> Unit = {}
 ) {
     val selectedNotes by viewModel.selectedNotes.collectAsStateWithLifecycle()
     val selectionMode by viewModel.isSelectionMode.collectAsStateWithLifecycle()
@@ -37,6 +49,35 @@ fun NotesLandingScreen(
     Scaffold(
         modifier = modifier.fillMaxSize(),
         containerColor = CustomTheme.colors.WhiteAlpha100,
+        topBar = {
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(CustomTheme.spacing.spacing16dp)
+                    .height(48.dp)
+                    .clip(RoundedCornerShape(CustomTheme.spacing.spacing24dp))
+                    .background(CustomTheme.colors.PureBlackAlpha5)
+                    .clickable { onSearchClicked() }
+                    .padding(horizontal = CustomTheme.spacing.spacing16dp),
+                contentAlignment = Alignment.CenterStart
+            ) {
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.spacedBy(CustomTheme.spacing.spacing8dp)
+                ) {
+                    Icon(
+                        imageVector = Icons.Default.Search,
+                        contentDescription = null,
+                        tint = CustomTheme.colors.PureBlackAlpha40
+                    )
+                    Text(
+                        text = "Search notes...",
+                        style = CustomTheme.typography.body1,
+                        color = CustomTheme.colors.PureBlackAlpha40
+                    )
+                }
+            }
+        },
         floatingActionButton = {
             FloatingActionButton(
                 onClick = onAddNoteClicked,
@@ -47,7 +88,7 @@ fun NotesLandingScreen(
             }
         }
     ) { paddingValues ->
-        Box(
+        Column(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(paddingValues)
@@ -62,30 +103,17 @@ fun NotesLandingScreen(
                 horizontalArrangement = Arrangement.spacedBy(CustomTheme.spacing.spacing8dp),
                 verticalItemSpacing = CustomTheme.spacing.spacing8dp
             ) {
-                when (noteListUiState) {
-                    is NoteListUiState.Success -> {
-                        items((noteListUiState as NoteListUiState.Success).data) { note ->
-                            NoteCard(
-                                noteId = note.noteId,
-                                title = note.noteTitle ?: "",
-                                content = note.noteContent ?: "",
-                                isSelected = selectedNotes.contains(note.noteId),
-                                onSelected = { noteId ->
-                                    viewModel.selectNote(noteId)
-                                },
-                                onCardClick = { noteId ->
-                                    if (selectionMode) {
-                                        viewModel.selectNote(noteId)
-                                    } else {
-                                        onNoteClicked(noteId)
-                                    }
-                                }
-                            )
-                        }
+                noteGridItems(
+                    noteListUiState = noteListUiState,
+                    selectedNotes = selectedNotes,
+                    isInSelectionMode = selectionMode,
+                    onNoteSelected = { noteId ->
+                        viewModel.selectNote(noteId)
+                    },
+                    onNoteClicked = { noteId ->
+                        onNoteClicked(noteId)
                     }
-
-                    else -> {}
-                }
+                )
             }
         }
     }

@@ -70,7 +70,12 @@ fun NoteAddEditScreen(
     Scaffold(
         containerColor = CustomTheme.colors.WhiteAlpha100,
         topBar = {
-            Row(modifier = Modifier.padding(start = CustomTheme.spacing.spacing12dp)) {
+            Row(
+                modifier = Modifier.padding(
+                    start = CustomTheme.spacing.spacing12dp,
+                    top = CustomTheme.spacing.spacing16dp
+                )
+            ) {
                 Icon(
                     imageVector = Icons.AutoMirrored.Filled.ArrowBack,
                     tint = CustomTheme.colors.PureBlackAlpha100,
