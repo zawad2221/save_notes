@@ -11,6 +11,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
@@ -45,5 +46,19 @@ class NotesViewModel @Inject constructor(
             }
         }
         _isSelectionMode.value = _selectedNotes.value.isNotEmpty()
+    }
+
+    fun clearSelection() {
+        _selectedNotes.value = emptySet()
+        _isSelectionMode.value = false
+    }
+
+    fun deleteSelectedNotes() {
+        viewModelScope.launch {
+            _selectedNotes.value.forEach { noteId ->
+                noteRepository.deleteNoteById(noteId)
+            }
+            clearSelection()
+        }
     }
 }

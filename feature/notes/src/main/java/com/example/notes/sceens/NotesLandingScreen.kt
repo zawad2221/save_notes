@@ -13,7 +13,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.staggeredgrid.LazyVerticalStaggeredGrid
 import androidx.compose.foundation.lazy.staggeredgrid.StaggeredGridCells
-import androidx.compose.foundation.lazy.staggeredgrid.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
@@ -30,9 +29,9 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.example.design_system.theme.CustomTheme
+import com.example.commonui.components.SelectionToolbar
 import com.example.commonui.noteGridItems
-import com.example.commonui.state.NoteListUiState
+import com.example.design_system.theme.CustomTheme
 import com.example.notes.viewmodel.NotesViewModel
 
 @Composable
@@ -50,31 +49,43 @@ fun NotesLandingScreen(
         modifier = modifier.fillMaxSize(),
         containerColor = CustomTheme.colors.WhiteAlpha100,
         topBar = {
-            Box(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(CustomTheme.spacing.spacing16dp)
-                    .height(48.dp)
-                    .clip(RoundedCornerShape(CustomTheme.spacing.spacing24dp))
-                    .background(CustomTheme.colors.PureBlackAlpha5)
-                    .clickable { onSearchClicked() }
-                    .padding(horizontal = CustomTheme.spacing.spacing16dp),
-                contentAlignment = Alignment.CenterStart
-            ) {
-                Row(
-                    verticalAlignment = Alignment.CenterVertically,
-                    horizontalArrangement = Arrangement.spacedBy(CustomTheme.spacing.spacing8dp)
+            if (selectionMode) {
+                SelectionToolbar(
+                    selectedCount = selectedNotes.size,
+                    onCloseClicked = { viewModel.clearSelection() },
+                    onDeleteClicked = { viewModel.deleteSelectedNotes() }
+                )
+            } else {
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(
+                            top = CustomTheme.spacing.spacing16dp,
+                            bottom = CustomTheme.spacing.spacing1dp
+                        )
+                        .padding(horizontal = CustomTheme.spacing.spacing16dp)
+                        .height(48.dp)
+                        .clip(RoundedCornerShape(CustomTheme.spacing.spacing24dp))
+                        .background(CustomTheme.colors.PureBlackAlpha5)
+                        .clickable { onSearchClicked() }
+                        .padding(horizontal = CustomTheme.spacing.spacing16dp),
+                    contentAlignment = Alignment.CenterStart
                 ) {
-                    Icon(
-                        imageVector = Icons.Default.Search,
-                        contentDescription = null,
-                        tint = CustomTheme.colors.PureBlackAlpha40
-                    )
-                    Text(
-                        text = "Search notes...",
-                        style = CustomTheme.typography.body1,
-                        color = CustomTheme.colors.PureBlackAlpha40
-                    )
+                    Row(
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.spacedBy(CustomTheme.spacing.spacing8dp)
+                    ) {
+                        Icon(
+                            imageVector = Icons.Default.Search,
+                            contentDescription = null,
+                            tint = CustomTheme.colors.PureBlackAlpha40
+                        )
+                        Text(
+                            text = "Search notes...",
+                            style = CustomTheme.typography.body1,
+                            color = CustomTheme.colors.PureBlackAlpha40
+                        )
+                    }
                 }
             }
         },
@@ -92,6 +103,7 @@ fun NotesLandingScreen(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(paddingValues)
+                .padding(top = CustomTheme.spacing.spacing16dp)
                 .background(CustomTheme.colors.WhiteAlpha100)
         ) {
             LazyVerticalStaggeredGrid(
