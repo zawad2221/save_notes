@@ -11,6 +11,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.flatMapLatest
@@ -30,9 +31,11 @@ class NoteEditViewModel @Inject constructor(
     private val noteToEditId =
         savedStateHandle.getStateFlow(key = NoteConstants.NOTE_ID, initialValue = -1)
 
+    private val _isPinnedLocal = MutableStateFlow(false)
+
     @OptIn(ExperimentalCoroutinesApi::class)
     val isPinned: StateFlow<Boolean> = noteToEditId.flatMapLatest { noteId ->
-        if (noteId == -1) flowOf(false)
+        if (noteId == -1) _isPinnedLocal
         else noteRepository.pinnedNoteIds.map { it.contains(noteId) }
     }.stateIn(
         scope = viewModelScope,
@@ -64,7 +67,10 @@ class NoteEditViewModel @Inject constructor(
             noteId?.takeIf { it >= 0 }?.let {
                 noteRepository.updateNote(noteId, noteTitle, noteContent)
             } ?: run {
-                noteRepository.insertNote(title = noteTitle, content = noteContent)
+                val newId = noteRepository.insertNote(title = noteTitle, content = noteContent)
+                if (_isPinnedLocal.value) {
+                    noteRepository.pinNote(newId.toInt())
+                }
             }
         }
     }
@@ -73,7 +79,10 @@ class NoteEditViewModel @Inject constructor(
 
     fun togglePin() {
         val noteId = noteToEditId.value
-        if (noteId == -1) return
+        if (noteId == -1) {
+            _isPinnedLocal.value = !_isPinnedLocal.value
+            return
+        }
         viewModelScope.launch(Dispatchers.IO) {
             if (isPinned.value) {
                 noteRepository.unpinNote(noteId)

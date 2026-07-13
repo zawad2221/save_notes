@@ -1,7 +1,7 @@
 package com.example.database.utils
 
 import androidx.room.TypeConverter
-import kotlin.time.Instant
+import kotlinx.datetime.Instant
 
 class InstantConverter {
     @TypeConverter

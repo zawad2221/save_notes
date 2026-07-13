@@ -12,7 +12,7 @@ interface NoteRepository {
 
     suspend fun deleteNoteById(id: Int)
     suspend fun updateNote(id: Int, title: String, content: String)
-    suspend fun insertNote(title: String, content: String)
+    suspend fun insertNote(title: String, content: String): Long
     val pinnedNoteIds: Flow<Set<Int>>
     suspend fun pinNote(noteId: Int)
     suspend fun unpinNote(noteId: Int)

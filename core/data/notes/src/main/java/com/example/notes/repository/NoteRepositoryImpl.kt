@@ -44,8 +44,8 @@ class NoteRepositoryImpl @Inject constructor(
         }
     }
 
-    override suspend fun insertNote(title: String, content: String) {
-        noteDao.insertNote(
+    override suspend fun insertNote(title: String, content: String): Long {
+        return noteDao.insertNote(
             NoteEntity(
                 title = title,
                 content = content,

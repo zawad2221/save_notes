@@ -23,7 +23,7 @@ interface NoteDao {
     fun updateNote(id: Int, title: String, content: String, updateAt: Long)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertNote(noteEntity: NoteEntity)
+    fun insertNote(noteEntity: NoteEntity): Long
 
     @Query("SELECT * FROM notes WHERE title LIKE '%' || :query || '%' OR content LIKE '%' || :query || '%'")
     fun searchNotes(query: String): Flow<List<NoteEntity>>

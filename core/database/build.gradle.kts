@@ -26,6 +26,8 @@ dependencies {
     implementation(libs.androidx.room.ktx)
     ksp(libs.androidx.room.compiler)
 
+    implementation(libs.kotlinx.datetime)
+
     // Hilt
     implementation(libs.hilt.android)
     ksp(libs.hilt.compiler)
