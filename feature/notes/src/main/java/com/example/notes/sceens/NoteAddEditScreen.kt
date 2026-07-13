@@ -1,8 +1,10 @@
 package com.example.notes.sceens
 
+import androidx.compose.animation.ExperimentalSharedTransitionApi
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -12,7 +14,10 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material.icons.filled.PushPin
+import androidx.compose.material.icons.outlined.PushPin
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -23,6 +28,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.SolidColor
@@ -32,6 +38,7 @@ import com.example.design_system.theme.CustomTheme
 import com.example.notes.state.NoteEditUiState
 import com.example.notes.viewmodel.NoteEditViewModel
 
+@OptIn(ExperimentalSharedTransitionApi::class)
 @Composable
 fun NoteAddEditScreen(
     modifier: Modifier = Modifier,
@@ -43,6 +50,7 @@ fun NoteAddEditScreen(
         viewModel.setSelectedNoteId(noteId)
     }
     val selectedNoteUiState by viewModel.selectedNoteUiState.collectAsStateWithLifecycle()
+    val isPinned by viewModel.isPinned.collectAsStateWithLifecycle()
     var title by rememberSaveable { mutableStateOf("") }
     var content by rememberSaveable { mutableStateOf("") }
 
@@ -59,11 +67,13 @@ fun NoteAddEditScreen(
     }
     DisposableEffect(Unit) {
         onDispose {
-            viewModel.saveOrUpdateNote(
-                noteId = noteId,
-                noteTitle = title,
-                noteContent = content
-            )
+            if (title.isNotEmpty() || content.isNotEmpty()) {
+                viewModel.saveOrUpdateNote(
+                    noteId = noteId,
+                    noteTitle = title,
+                    noteContent = content
+                )
+            }
         }
     }
 
@@ -71,10 +81,14 @@ fun NoteAddEditScreen(
         containerColor = CustomTheme.colors.WhiteAlpha100,
         topBar = {
             Row(
-                modifier = Modifier.padding(
-                    start = CustomTheme.spacing.spacing12dp,
-                    top = CustomTheme.spacing.spacing16dp
-                )
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(
+                        start = CustomTheme.spacing.spacing12dp,
+                        end = CustomTheme.spacing.spacing12dp,
+                        top = CustomTheme.spacing.spacing16dp
+                    ),
+                verticalAlignment = Alignment.CenterVertically
             ) {
                 Icon(
                     imageVector = Icons.AutoMirrored.Filled.ArrowBack,
@@ -83,11 +97,21 @@ fun NoteAddEditScreen(
                         .size(CustomTheme.spacing.spacing24dp)
                         .clip(CircleShape)
                         .clickable(onClick = onBackAction),
-                    contentDescription = null
+                    contentDescription = "Back"
                 )
+                Spacer(modifier = Modifier.weight(1f))
+                IconButton(onClick = { viewModel.togglePin() }) {
+                    Icon(
+                        imageVector = if (isPinned) Icons.Default.PushPin else Icons.Outlined.PushPin,
+                        tint = if (isPinned) CustomTheme.colors.Purple40 else CustomTheme.colors.PureBlackAlpha100,
+                        modifier = Modifier.size(CustomTheme.spacing.spacing24dp),
+                        contentDescription = "Pin"
+                    )
+                }
             }
         },
-        modifier = modifier.fillMaxSize()
+        modifier = modifier
+            .fillMaxSize()
     ) { paddingValues ->
         NoteEditFields(
             modifier = Modifier

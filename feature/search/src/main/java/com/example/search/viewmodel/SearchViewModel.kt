@@ -6,6 +6,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.commonui.state.NoteListUiState
 import com.example.notes.repository.NoteRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
@@ -68,7 +69,7 @@ class SearchViewModel @Inject constructor(
     }
 
     fun deleteSelectedNotes() {
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.IO) {
             _selectedNotes.value.forEach { noteId ->
                 noteRepository.deleteNoteById(noteId)
             }

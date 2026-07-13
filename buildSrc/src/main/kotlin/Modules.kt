@@ -19,5 +19,7 @@ object Modules {
         const val constants = ":core:constants"
         const val database = ":core:database"
         const val common = ":core:common"
+        const val datastore = ":core:datastore"
+        const val datastoreProto = ":core:datastore-proto"
     }
 }
