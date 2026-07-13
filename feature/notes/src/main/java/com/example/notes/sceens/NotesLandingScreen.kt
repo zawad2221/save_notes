@@ -1,5 +1,6 @@
 package com.example.notes.sceens
 
+import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -45,6 +46,11 @@ fun NotesLandingScreen(
     val selectedNotes by viewModel.selectedNotes.collectAsStateWithLifecycle()
     val selectionMode by viewModel.isSelectionMode.collectAsStateWithLifecycle()
     val noteListUiState by viewModel.noteListUiState.collectAsStateWithLifecycle()
+
+    BackHandler(enabled = selectionMode) {
+        viewModel.clearSelection()
+    }
+
     Scaffold(
         modifier = modifier.fillMaxSize(),
         containerColor = CustomTheme.colors.WhiteAlpha100,
@@ -53,6 +59,7 @@ fun NotesLandingScreen(
                 SelectionToolbar(
                     selectedCount = selectedNotes.size,
                     onCloseClicked = { viewModel.clearSelection() },
+                    onPinClicked = { viewModel.pinSelectedNotes() },
                     onDeleteClicked = { viewModel.deleteSelectedNotes() }
                 )
             } else {

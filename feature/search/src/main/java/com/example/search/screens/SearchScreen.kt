@@ -55,6 +55,7 @@ fun SearchScreen(
             SelectionToolbar(
                 selectedCount = selectedNotes.size,
                 onCloseClicked = viewModel::clearSelection,
+                onPinClicked = viewModel::pinSelectedNotes,
                 onDeleteClicked = viewModel::deleteSelectedNotes
             )
         } else {

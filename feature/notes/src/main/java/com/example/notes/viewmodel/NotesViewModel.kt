@@ -62,4 +62,13 @@ class NotesViewModel @Inject constructor(
             clearSelection()
         }
     }
+
+    fun pinSelectedNotes() {
+        viewModelScope.launch(Dispatchers.IO) {
+            _selectedNotes.value.forEach { noteId ->
+                noteRepository.pinNote(noteId)
+            }
+            clearSelection()
+        }
+    }
 }

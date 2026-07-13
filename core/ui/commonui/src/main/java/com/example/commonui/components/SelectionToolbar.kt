@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.Delete
+import androidx.compose.material.icons.filled.PushPin
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -23,6 +24,7 @@ import com.example.design_system.theme.CustomTheme
 fun SelectionToolbar(
     selectedCount: Int,
     onCloseClicked: () -> Unit,
+    onPinClicked: () -> Unit,
     onDeleteClicked: () -> Unit
 ) {
     Column {
@@ -49,12 +51,21 @@ fun SelectionToolbar(
                     modifier = Modifier.padding(start = CustomTheme.spacing.spacing8dp)
                 )
             }
-            IconButton(onClick = onDeleteClicked) {
-                Icon(
-                    imageVector = Icons.Default.Delete,
-                    contentDescription = "Delete",
-                    tint = CustomTheme.colors.PureBlackAlpha100
-                )
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                IconButton(onClick = onPinClicked) {
+                    Icon(
+                        imageVector = Icons.Default.PushPin,
+                        contentDescription = "Pin",
+                        tint = CustomTheme.colors.PureBlackAlpha100
+                    )
+                }
+                IconButton(onClick = onDeleteClicked) {
+                    Icon(
+                        imageVector = Icons.Default.Delete,
+                        contentDescription = "Delete",
+                        tint = CustomTheme.colors.PureBlackAlpha100
+                    )
+                }
             }
         }
         HorizontalDivider(

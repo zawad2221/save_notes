@@ -76,6 +76,15 @@ class SearchViewModel @Inject constructor(
             clearSelection()
         }
     }
+
+    fun pinSelectedNotes() {
+        viewModelScope.launch(Dispatchers.IO) {
+            _selectedNotes.value.forEach { noteId ->
+                noteRepository.pinNote(noteId)
+            }
+            clearSelection()
+        }
+    }
 }
 
 private const val SEARCH_QUERY = "search_query"
