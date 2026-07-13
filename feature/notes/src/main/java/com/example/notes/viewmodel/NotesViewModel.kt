@@ -9,6 +9,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.flow.stateIn
@@ -38,6 +39,17 @@ class NotesViewModel @Inject constructor(
     private val _isSelectionMode = MutableStateFlow<Boolean>(false)
     val isSelectionMode: StateFlow<Boolean> = _isSelectionMode
 
+    val isAllSelectedNotesPinned: StateFlow<Boolean> = combine(
+        _selectedNotes,
+        noteRepository.pinnedNoteIds
+    ) { selected, pinned ->
+        selected.isNotEmpty() && selected.all { pinned.contains(it) }
+    }.stateIn(
+        scope = viewModelScope,
+        started = SharingStarted.WhileSubscribed(5_000),
+        initialValue = false
+    )
+
     fun selectNote(noteId: Int) {
         _selectedNotes.value = _selectedNotes.value.toMutableSet().apply {
             if (!contains(noteId)) {
@@ -65,8 +77,13 @@ class NotesViewModel @Inject constructor(
 
     fun pinSelectedNotes() {
         viewModelScope.launch(Dispatchers.IO) {
+            val allPinned = isAllSelectedNotesPinned.value
             _selectedNotes.value.forEach { noteId ->
-                noteRepository.pinNote(noteId)
+                if (allPinned) {
+                    noteRepository.unpinNote(noteId)
+                } else {
+                    noteRepository.pinNote(noteId)
+                }
             }
             clearSelection()
         }

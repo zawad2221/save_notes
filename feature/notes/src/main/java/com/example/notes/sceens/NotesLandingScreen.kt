@@ -45,6 +45,7 @@ fun NotesLandingScreen(
 ) {
     val selectedNotes by viewModel.selectedNotes.collectAsStateWithLifecycle()
     val selectionMode by viewModel.isSelectionMode.collectAsStateWithLifecycle()
+    val isAllPinned by viewModel.isAllSelectedNotesPinned.collectAsStateWithLifecycle()
     val noteListUiState by viewModel.noteListUiState.collectAsStateWithLifecycle()
 
     BackHandler(enabled = selectionMode) {
@@ -58,6 +59,7 @@ fun NotesLandingScreen(
             if (selectionMode) {
                 SelectionToolbar(
                     selectedCount = selectedNotes.size,
+                    isAllPinned = isAllPinned,
                     onCloseClicked = { viewModel.clearSelection() },
                     onPinClicked = { viewModel.pinSelectedNotes() },
                     onDeleteClicked = { viewModel.deleteSelectedNotes() }

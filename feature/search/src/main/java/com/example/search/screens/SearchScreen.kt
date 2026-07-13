@@ -44,6 +44,7 @@ fun SearchScreen(
     val searchQuery by viewModel.searchQuery.collectAsStateWithLifecycle()
     val searchResult by viewModel.searchResult.collectAsStateWithLifecycle()
     val selectedNotes by viewModel.selectedNotes.collectAsStateWithLifecycle()
+    val isAllPinned by viewModel.isAllSelectedNotesPinned.collectAsStateWithLifecycle()
     val selectionMode by viewModel.isSelectionMode.collectAsStateWithLifecycle()
 
     Column(
@@ -54,6 +55,7 @@ fun SearchScreen(
         if (selectionMode) {
             SelectionToolbar(
                 selectedCount = selectedNotes.size,
+                isAllPinned = isAllPinned,
                 onCloseClicked = viewModel::clearSelection,
                 onPinClicked = viewModel::pinSelectedNotes,
                 onDeleteClicked = viewModel::deleteSelectedNotes

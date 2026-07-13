@@ -10,6 +10,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.PushPin
+import androidx.compose.material.icons.outlined.PushPin
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -23,6 +24,7 @@ import com.example.design_system.theme.CustomTheme
 @Composable
 fun SelectionToolbar(
     selectedCount: Int,
+    isAllPinned: Boolean,
     onCloseClicked: () -> Unit,
     onPinClicked: () -> Unit,
     onDeleteClicked: () -> Unit
@@ -54,9 +56,9 @@ fun SelectionToolbar(
             Row(verticalAlignment = Alignment.CenterVertically) {
                 IconButton(onClick = onPinClicked) {
                     Icon(
-                        imageVector = Icons.Default.PushPin,
+                        imageVector = if (isAllPinned) Icons.Default.PushPin else Icons.Outlined.PushPin,
                         contentDescription = "Pin",
-                        tint = CustomTheme.colors.PureBlackAlpha100
+                        tint = if (isAllPinned) CustomTheme.colors.Purple40 else CustomTheme.colors.PureBlackAlpha100
                     )
                 }
                 IconButton(onClick = onDeleteClicked) {
