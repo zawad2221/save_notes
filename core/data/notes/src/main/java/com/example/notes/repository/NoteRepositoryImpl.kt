@@ -5,9 +5,9 @@ import com.example.database.dao.NoteDao
 import com.example.database.model.NoteEntity
 import com.example.datastore.PinNoteDataSource
 import com.example.notes.mapper.toNoteModel
-import com.example.notes.mapper.toNoteModelList
 import com.example.notes.model.NoteModel
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
@@ -19,14 +19,16 @@ class NoteRepositoryImpl @Inject constructor(
     override val pinnedNoteIds: Flow<Set<Int>> = pinNoteDataSource.pinnedNoteIds
 
     override fun getAllNotes(): Flow<List<NoteModel>> {
-        return noteDao.getAllNotes().map { notes ->
-            notes.toNoteModelList()
+        return combine(noteDao.getAllNotes(), pinNoteDataSource.pinnedNoteIds) { notes, pinnedIds ->
+            notes.map { entity ->
+                entity.toNoteModel().copy(isPinned = pinnedIds.contains(entity.id))
+            }
         }
     }
 
     override suspend fun getNoteById(id: Int): Flow<NoteModel> {
-        return noteDao.getNoteById(id).map { note ->
-            note.toNoteModel()
+        return combine(noteDao.getNoteById(id), pinNoteDataSource.pinnedNoteIds) { note, pinnedIds ->
+            note.toNoteModel().copy(isPinned = pinnedIds.contains(note.id))
         }
     }
 
@@ -39,8 +41,10 @@ class NoteRepositoryImpl @Inject constructor(
     }
 
     override suspend fun searchNotes(query: String): Flow<List<NoteModel>> {
-        return noteDao.searchNotes(query).map { notes ->
-            notes.toNoteModelList()
+        return combine(noteDao.searchNotes(query), pinNoteDataSource.pinnedNoteIds) { notes, pinnedIds ->
+            notes.map { entity ->
+                entity.toNoteModel().copy(isPinned = pinnedIds.contains(entity.id))
+            }
         }
     }
 

@@ -5,5 +5,6 @@ data class NoteModel(
     val noteTitle: String?,
     val noteContent: String?,
     val createdAt: Long,
-    val updatedAt: Long
+    val updatedAt: Long,
+    val isPinned: Boolean = false
 )
