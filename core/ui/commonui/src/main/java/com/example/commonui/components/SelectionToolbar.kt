@@ -43,13 +43,12 @@ fun SelectionToolbar(
                     Icon(
                         imageVector = Icons.Default.Close,
                         contentDescription = "Close",
-                        tint = CustomTheme.colors.PureBlackAlpha100
+                        tint = CustomTheme.colors.BrandPrimary100
                     )
                 }
                 Text(
                     text = "$selectedCount selected",
                     style = CustomTheme.typography.subhead1,
-                    color = CustomTheme.colors.PureBlackAlpha100,
                     modifier = Modifier.padding(start = CustomTheme.spacing.spacing8dp)
                 )
             }
@@ -58,21 +57,21 @@ fun SelectionToolbar(
                     Icon(
                         imageVector = if (isAllPinned) Icons.Default.PushPin else Icons.Outlined.PushPin,
                         contentDescription = "Pin",
-                        tint = if (isAllPinned) CustomTheme.colors.Purple40 else CustomTheme.colors.PureBlackAlpha100
+                        tint = CustomTheme.colors.BrandPrimary100
                     )
                 }
                 IconButton(onClick = onDeleteClicked) {
                     Icon(
                         imageVector = Icons.Default.Delete,
                         contentDescription = "Delete",
-                        tint = CustomTheme.colors.PureBlackAlpha100
+                        tint = CustomTheme.colors.ButtonWarningDefault
                     )
                 }
             }
         }
         HorizontalDivider(
             thickness = 1.dp,
-            color = CustomTheme.colors.PureBlackAlpha10
+            color = CustomTheme.colors.FillAlternate
         )
     }
 }

@@ -32,7 +32,7 @@ fun NoteCard(
                 onClick = { onCardClick.invoke(noteId) },
                 onLongClick = { onSelected.invoke(noteId) }
             ),
-        colors = CardDefaults.cardColors(containerColor = CustomTheme.colors.PureBlackAlpha5),
+        colors = CardDefaults.cardColors(containerColor = CustomTheme.colors.BackgroundSecondary),
         shape = RoundedCornerShape(CustomTheme.spacing.spacing8dp),
         border = BorderStroke(
             width = if (isSelected) {
@@ -41,9 +41,9 @@ fun NoteCard(
                 CustomTheme.spacing.spacing1dp
             },
             color = if (isSelected) {
-                CustomTheme.colors.Purple40
+                CustomTheme.colors.BrandPrimary100
             } else {
-                CustomTheme.colors.PurpleGrey80
+                CustomTheme.colors.FillAlternate
             }
         )
     ) {
