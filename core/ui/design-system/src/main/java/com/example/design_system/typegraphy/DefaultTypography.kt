@@ -33,5 +33,35 @@ data class DefaultTypography(
                 body2 = TypographyDefaultTheme.Body2,
                 body3 = TypographyDefaultTheme.Body3,
             )
+
+        val darkTypography: DefaultTypography
+            @Composable get() = DefaultTypography(
+                h1 = TypographyDarkTheme.H1,
+                h2 = TypographyDarkTheme.H2,
+                h3 = TypographyDarkTheme.H3,
+                h4 = TypographyDarkTheme.H4,
+                titleHeader = TypographyDarkTheme.TitleHeader,
+                subhead1 = TypographyDarkTheme.Subhead1,
+                subhead2 = TypographyDarkTheme.Subhead2,
+                subhead3 = TypographyDarkTheme.Subhead3,
+                body1 = TypographyDarkTheme.Body1,
+                body2 = TypographyDarkTheme.Body2,
+                body3 = TypographyDarkTheme.Body3,
+            )
+
+        val lightTypography: DefaultTypography
+            @Composable get() = DefaultTypography(
+                h1 = TypographyLightTheme.H1,
+                h2 = TypographyLightTheme.H2,
+                h3 = TypographyLightTheme.H3,
+                h4 = TypographyLightTheme.H4,
+                titleHeader = TypographyLightTheme.TitleHeader,
+                subhead1 = TypographyLightTheme.Subhead1,
+                subhead2 = TypographyLightTheme.Subhead2,
+                subhead3 = TypographyLightTheme.Subhead3,
+                body1 = TypographyLightTheme.Body1,
+                body2 = TypographyLightTheme.Body2,
+                body3 = TypographyLightTheme.Body3,
+            )
     }
 }

@@ -28,7 +28,7 @@ fun NoteNavHost(
 ) {
     Scaffold(
         modifier = Modifier.fillMaxSize(),
-        containerColor = CustomTheme.colors.WhiteAlpha100
+        containerColor = CustomTheme.colors.BackgroundPrimary
     ) { paddingValues ->
         NavHost(
             navController = navController,

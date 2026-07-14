@@ -1,6 +1,7 @@
 package com.example.design_system.theme
 
 import android.app.Activity
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.lightColorScheme
@@ -34,24 +35,42 @@ private val LightColorScheme = lightColorScheme(
 )
 
 @Composable
-fun NotesDefaultTheme(content: @Composable () -> Unit) {
-    val colorScheme = LightColorScheme
-    val isDarkTheme = colorScheme == DarkColorScheme
+fun NotesDefaultTheme(
+    darkTheme: Boolean = isSystemInDarkTheme(),
+    content: @Composable () -> Unit
+) {
+    val colorScheme = if (darkTheme) {
+        DarkColorScheme
+    } else {
+        LightColorScheme
+    }
+
+    val designSystemColor = if (darkTheme) {
+        DesignSystemColor.darkThemeColor
+    } else {
+        DesignSystemColor.lightThemeColor
+    }
+
+    val typography = if (darkTheme) {
+        DefaultTypography.darkTypography
+    } else {
+        DefaultTypography.lightTypography
+    }
 
     val view = LocalView.current
     if (!view.isInEditMode) {
         SideEffect {
             val window = (view.context as Activity).window
             val insetsController = WindowCompat.getInsetsController(window, view)
-            insetsController.isAppearanceLightStatusBars = !isDarkTheme
+            insetsController.isAppearanceLightStatusBars = !darkTheme
         }
     }
 
     CompositionLocalProvider(
-        LocalDesignSystemColors provides DesignSystemColor.defaultColor,
+        LocalDesignSystemColors provides designSystemColor,
         LocalDesignSystemSpacing provides rememberDefaultSpacing(),
         LocalDesignSystemTextSize provides rememberDefaultTextSize(),
-        LocalDesignSystemTypography provides DefaultTypography.defaultTypography
+        LocalDesignSystemTypography provides typography
     ) {
         MaterialTheme(
             colorScheme = colorScheme, typography = Typography, content = content

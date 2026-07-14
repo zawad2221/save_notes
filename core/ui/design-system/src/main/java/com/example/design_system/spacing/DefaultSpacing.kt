@@ -26,7 +26,8 @@ data class DefaultSpacing(
     val spacing26dp: Dp = 26.dp,
     val spacing28dp: Dp = 28.dp,
     val spacing30dp: Dp = 30.dp,
-    val spacing32dp: Dp = 32.dp
+    val spacing32dp: Dp = 32.dp,
+    val spacing48dp: Dp = 48.dp
 )
 
 @Composable
@@ -48,5 +49,6 @@ fun rememberDefaultSpacing() = DefaultSpacing(
     spacing26dp = dimensionResource(id = R.dimen.default_spacing_26dp),
     spacing28dp = dimensionResource(id = R.dimen.default_spacing_28dp),
     spacing30dp = dimensionResource(id = R.dimen.default_spacing_30dp),
-    spacing32dp = dimensionResource(id = R.dimen.default_spacing_32dp)
+    spacing32dp = dimensionResource(id = R.dimen.default_spacing_32dp),
+    spacing48dp = dimensionResource(id = R.dimen.default_spacing_48dp)
 )

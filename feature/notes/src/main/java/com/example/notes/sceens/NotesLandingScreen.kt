@@ -56,7 +56,7 @@ fun NotesLandingScreen(
 
     Scaffold(
         modifier = modifier.fillMaxSize(),
-        containerColor = CustomTheme.colors.WhiteAlpha100,
+        containerColor = CustomTheme.colors.BackgroundPrimary,
         topBar = {
             if (selectionMode) {
                 SelectionToolbar(
@@ -75,9 +75,9 @@ fun NotesLandingScreen(
                             bottom = CustomTheme.spacing.spacing1dp
                         )
                         .padding(horizontal = CustomTheme.spacing.spacing16dp)
-                        .height(48.dp)
+                        .height(CustomTheme.spacing.spacing48dp)
                         .clip(RoundedCornerShape(CustomTheme.spacing.spacing24dp))
-                        .background(CustomTheme.colors.PureBlackAlpha5)
+                        .background(CustomTheme.colors.BackgroundSecondary)
                         .clickable { onSearchClicked() }
                         .padding(horizontal = CustomTheme.spacing.spacing16dp),
                     contentAlignment = Alignment.CenterStart
@@ -86,15 +86,9 @@ fun NotesLandingScreen(
                         verticalAlignment = Alignment.CenterVertically,
                         horizontalArrangement = Arrangement.spacedBy(CustomTheme.spacing.spacing8dp)
                     ) {
-                        Icon(
-                            imageVector = Icons.Default.Search,
-                            contentDescription = null,
-                            tint = CustomTheme.colors.PureBlackAlpha40
-                        )
                         Text(
                             text = "Search notes...",
-                            style = CustomTheme.typography.body1,
-                            color = CustomTheme.colors.PureBlackAlpha40
+                            style = CustomTheme.typography.body1
                         )
                     }
                 }
@@ -103,8 +97,8 @@ fun NotesLandingScreen(
         floatingActionButton = {
             FloatingActionButton(
                 onClick = onAddNoteClicked,
-                containerColor = CustomTheme.colors.PureBlackAlpha100,
-                contentColor = CustomTheme.colors.WhiteAlpha100
+                containerColor = CustomTheme.colors.FillIconPrimary,
+                contentColor = CustomTheme.colors.FillPrimary5
             ) {
                 Icon(imageVector = Icons.Default.Add, contentDescription = "Add Note")
             }
@@ -115,7 +109,6 @@ fun NotesLandingScreen(
                 .fillMaxSize()
                 .padding(paddingValues)
                 .padding(top = CustomTheme.spacing.spacing16dp)
-                .background(CustomTheme.colors.WhiteAlpha100)
         ) {
             LazyVerticalStaggeredGrid(
                 columns = StaggeredGridCells.Fixed(2),
