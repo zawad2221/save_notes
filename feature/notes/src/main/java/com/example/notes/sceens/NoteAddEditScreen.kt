@@ -78,7 +78,7 @@ fun NoteAddEditScreen(
     }
 
     Scaffold(
-        containerColor = CustomTheme.colors.WhiteAlpha100,
+        containerColor = CustomTheme.colors.BackgroundPrimary,
         topBar = {
             Row(
                 modifier = Modifier
@@ -92,7 +92,7 @@ fun NoteAddEditScreen(
             ) {
                 Icon(
                     imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                    tint = CustomTheme.colors.PureBlackAlpha100,
+                    tint = CustomTheme.colors.BrandPrimary100,
                     modifier = Modifier
                         .size(CustomTheme.spacing.spacing24dp)
                         .clip(CircleShape)
@@ -103,7 +103,7 @@ fun NoteAddEditScreen(
                 IconButton(onClick = { viewModel.togglePin() }) {
                     Icon(
                         imageVector = if (isPinned) Icons.Default.PushPin else Icons.Outlined.PushPin,
-                        tint = if (isPinned) CustomTheme.colors.Purple40 else CustomTheme.colors.PureBlackAlpha100,
+                        tint = CustomTheme.colors.BrandPrimary100,
                         modifier = Modifier.size(CustomTheme.spacing.spacing24dp),
                         contentDescription = "Pin"
                     )
@@ -151,7 +151,7 @@ fun NoteEditFields(
                         if (initialTitle.isEmpty()) {
                             Text(
                                 text = "Title",
-                                style = CustomTheme.typography.titleHeader.copy(color = CustomTheme.colors.PureBlackAlpha40)
+                                style = CustomTheme.typography.titleHeader.copy(color = CustomTheme.colors.TextSecondary)
                             )
                         }
                         innerTextField()
@@ -175,7 +175,7 @@ fun NoteEditFields(
                         if (initialContent.isEmpty()) {
                             Text(
                                 text = "Note",
-                                style = CustomTheme.typography.body1.copy(color = CustomTheme.colors.PureBlackAlpha40)
+                                style = CustomTheme.typography.body1.copy(color = CustomTheme.colors.TextSecondary)
                             )
                         }
                         innerTextField()

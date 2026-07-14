@@ -50,7 +50,7 @@ fun SearchScreen(
     Column(
         modifier = modifier
             .fillMaxSize()
-            .background(CustomTheme.colors.WhiteAlpha100)
+            .background(CustomTheme.colors.BackgroundPrimary)
     ) {
         if (selectionMode) {
             SelectionToolbar(
@@ -71,14 +71,22 @@ fun SearchScreen(
                     Icon(
                         imageVector = Icons.AutoMirrored.Filled.ArrowBack,
                         contentDescription = "Back",
-                        tint = CustomTheme.colors.PureBlackAlpha100
+                        tint = CustomTheme.colors.BrandPrimary100
                     )
                 }
                 TextField(
                     value = searchQuery,
                     onValueChange = { viewModel.onSearchQueryChanged(it) },
                     modifier = Modifier.weight(1f),
-                    placeholder = { Text(text = "Search notes...") },
+                    placeholder = {
+                        Text(
+                            text = "Search notes...",
+                            style = CustomTheme.typography.body1.copy(
+                                CustomTheme.colors.TextSecondary
+                            )
+                        )
+                    },
+                    textStyle = CustomTheme.typography.body1,
                     trailingIcon = {
                         if (searchQuery.isNotEmpty()) {
                             IconButton(onClick = {
@@ -87,6 +95,7 @@ fun SearchScreen(
                             }) {
                                 Icon(
                                     imageVector = Icons.Default.Close,
+                                    tint = CustomTheme.colors.BrandPrimary100,
                                     contentDescription = "Clear"
                                 )
                             }
@@ -104,9 +113,8 @@ fun SearchScreen(
             }
 
             HorizontalDivider(
-                modifier = Modifier.padding(horizontal = CustomTheme.spacing.spacing16dp),
                 thickness = 1.dp,
-                color = CustomTheme.colors.PureBlackAlpha10
+                color = CustomTheme.colors.FillAlternate
             )
         }
 
