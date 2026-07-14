@@ -52,7 +52,7 @@ dependencies {
 
     //module
     implementation(project(Modules.Core.designSystem))
-    implementation(project(Modules.Data.notes))
+    implementation(project(Modules.Core.data))
     implementation(project(Modules.Feature.notes))
     implementation(project(Modules.Feature.search))
     implementation(project(Modules.base))

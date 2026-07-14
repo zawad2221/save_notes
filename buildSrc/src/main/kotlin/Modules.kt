@@ -5,11 +5,6 @@ object Modules {
         const val notes = ":feature:notes"
         const val search = ":feature:search"
     }
-
-    object Data {
-        const val notes = ":core:data"
-    }
-
     object Core {
         const val designSystem = ":core:ui:design-system"
         const val api = ":core:api"
@@ -22,5 +17,6 @@ object Modules {
         const val datastore = ":core:datastore"
         const val datastoreProto = ":core:datastore-proto"
         const val coreModel = ":core:model"
+        const val data = ":core:data"
     }
 }

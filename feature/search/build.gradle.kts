@@ -32,7 +32,7 @@ dependencies {
     implementation(project(Modules.Core.designSystem))
     implementation(project(Modules.Core.coreModel))
     implementation(project(Modules.Core.constants))
-    implementation(project(Modules.Data.notes))
+    implementation(project(Modules.Core.data))
     implementation(project(Modules.Core.commonui))
 
     // Hilt

@@ -36,5 +36,5 @@ dependencies {
     // module
     implementation(project(Modules.Core.designSystem))
     implementation(project(Modules.Core.coreModel))
-    implementation(project(Modules.Data.notes))
+    implementation(project(Modules.Core.data))
 }
