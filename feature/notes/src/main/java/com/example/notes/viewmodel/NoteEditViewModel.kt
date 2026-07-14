@@ -5,7 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.common.di.ApplicationScope
 import com.example.constants.NoteConstants
-import com.example.notes.repository.NoteRepository
+import com.example.data.repository.NoteRepository
 import com.example.notes.state.NoteEditUiState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineScope

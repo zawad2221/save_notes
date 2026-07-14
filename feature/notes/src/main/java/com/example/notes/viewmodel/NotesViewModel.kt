@@ -2,8 +2,10 @@ package com.example.notes.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.notes.repository.NoteRepository
 import com.example.commonui.state.NoteListUiState
+import com.example.data.repository.NoteRepository
+import com.example.data.repository.UserPrefRepository
+import com.example.model.ThemeConfig
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -18,7 +20,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class NotesViewModel @Inject constructor(
-    private val noteRepository: NoteRepository
+    private val noteRepository: NoteRepository,
+    private val userPrefRepository: UserPrefRepository
 ) : ViewModel() {
 
     val noteListUiState: StateFlow<NoteListUiState> =
@@ -38,6 +41,26 @@ class NotesViewModel @Inject constructor(
 
     private val _isSelectionMode = MutableStateFlow<Boolean>(false)
     val isSelectionMode: StateFlow<Boolean> = _isSelectionMode
+
+    private val _showThemeDialog = MutableStateFlow(false)
+    val showThemeDialog: StateFlow<Boolean> = _showThemeDialog
+
+    val themeConfig: StateFlow<ThemeConfig> = userPrefRepository.themeConfig
+        .stateIn(
+            scope = viewModelScope,
+            started = SharingStarted.WhileSubscribed(5_000),
+            initialValue = ThemeConfig.SYSTEM
+        )
+
+    fun setShowThemeDialog(show: Boolean) {
+        _showThemeDialog.value = show
+    }
+
+    fun setThemeConfig(themeConfig: ThemeConfig) {
+        viewModelScope.launch(Dispatchers.Default) {
+            userPrefRepository.setThemeConfig(themeConfig)
+        }
+    }
 
     val isAllSelectedNotesPinned: StateFlow<Boolean> = combine(
         _selectedNotes,

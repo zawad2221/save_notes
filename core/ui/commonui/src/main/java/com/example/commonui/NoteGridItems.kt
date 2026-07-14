@@ -1,11 +1,10 @@
 package com.example.commonui
 
 import androidx.compose.foundation.lazy.staggeredgrid.LazyStaggeredGridScope
-import androidx.compose.foundation.lazy.staggeredgrid.StaggeredGridItemSpan
 import androidx.compose.foundation.lazy.staggeredgrid.items
 import com.example.commonui.components.NoteCard
 import com.example.commonui.state.NoteListUiState
-import com.example.notes.model.NoteModel
+import com.example.model.NoteModel
 
 fun LazyStaggeredGridScope.noteGridItems(
     noteListUiState: NoteListUiState,

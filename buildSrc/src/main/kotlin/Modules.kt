@@ -1,13 +1,13 @@
 object Modules {
     const val base = ":base"
-    
+
     object Feature {
         const val notes = ":feature:notes"
         const val search = ":feature:search"
     }
-    
+
     object Data {
-        const val notes = ":core:data:notes"
+        const val notes = ":core:data"
     }
 
     object Core {
@@ -21,5 +21,6 @@ object Modules {
         const val common = ":core:common"
         const val datastore = ":core:datastore"
         const val datastoreProto = ":core:datastore-proto"
+        const val coreModel = ":core:model"
     }
 }

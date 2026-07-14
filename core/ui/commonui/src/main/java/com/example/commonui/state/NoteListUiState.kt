@@ -1,6 +1,6 @@
 package com.example.commonui.state
 
-import com.example.notes.model.NoteModel
+import com.example.model.NoteModel
 
 sealed interface NoteListUiState {
     data class Success(val data: List<NoteModel>) : NoteListUiState

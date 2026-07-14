@@ -7,12 +7,12 @@ plugins {
 
 android {
     namespace = "com.example.savenotes"
-    compileSdk = libs.versions.compileSdk.get().toString().toInt()
+    compileSdk = libs.versions.compileSdk.get().toInt()
 
     defaultConfig {
         applicationId = "com.example.savenotes"
-        minSdk = libs.versions.minSdk.get().toString().toInt()
-        targetSdk = libs.versions.targetSdk.get().toString().toInt()
+        minSdk = libs.versions.minSdk.get().toInt()
+        targetSdk = libs.versions.targetSdk.get().toInt()
         versionCode = 1
         versionName = "1.0"
 
@@ -52,9 +52,11 @@ dependencies {
 
     //module
     implementation(project(Modules.Core.designSystem))
+    implementation(project(Modules.Data.notes))
     implementation(project(Modules.Feature.notes))
     implementation(project(Modules.Feature.search))
     implementation(project(Modules.base))
+    implementation(project(Modules.Core.coreModel))
 
     testImplementation(libs.junit)
     androidTestImplementation(platform(libs.androidx.compose.bom))

@@ -1,6 +1,6 @@
 package com.example.notes.state
 
-import com.example.notes.model.NoteModel
+import com.example.model.NoteModel
 
 sealed interface NoteEditUiState {
     data class Success(val data: NoteModel) : NoteEditUiState

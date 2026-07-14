@@ -5,13 +5,12 @@ plugins {
 }
 
 android {
-    namespace = "com.example.core.datastore"
+    namespace = "com.example.core.data"
     compileSdk = libs.versions.compileSdk.get().toInt()
 
     defaultConfig {
         minSdk = libs.versions.minSdk.get().toInt()
     }
-
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
@@ -20,18 +19,17 @@ android {
 
 dependencies {
     implementation(libs.androidx.core.ktx)
-    
-    // DataStore
-    implementation(libs.androidx.datastore)
-    implementation(libs.androidx.datastore.preferences)
-    implementation(libs.protobuf.kotlin.lite)
+
+    // modules
+    implementation(project(Modules.Core.database))
+    implementation(project(Modules.Core.datastore))
+    implementation(project(Modules.Core.coreModel))
 
     // Hilt
     implementation(libs.hilt.android)
     ksp(libs.hilt.compiler)
 
-    // Modules
-    implementation(project(Modules.Core.common))
-    implementation(project(Modules.Core.datastoreProto))
-    implementation(project(Modules.Core.coreModel))
+    testImplementation(libs.junit)
+    androidTestImplementation(libs.androidx.espresso.core)
+    androidTestImplementation(libs.androidx.junit)
 }

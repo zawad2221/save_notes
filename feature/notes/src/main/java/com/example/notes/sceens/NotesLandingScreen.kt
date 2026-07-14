@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -19,8 +20,10 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Search
+import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -28,10 +31,10 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.unit.dp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.commonui.components.SelectionToolbar
+import com.example.commonui.components.ThemeSettingsDialog
 import com.example.commonui.noteItems
 import com.example.commonui.state.NoteListUiState
 import com.example.design_system.theme.CustomTheme
@@ -49,6 +52,19 @@ fun NotesLandingScreen(
     val selectionMode by viewModel.isSelectionMode.collectAsStateWithLifecycle()
     val isAllPinned by viewModel.isAllSelectedNotesPinned.collectAsStateWithLifecycle()
     val noteListUiState by viewModel.noteListUiState.collectAsStateWithLifecycle()
+    val showThemeDialog by viewModel.showThemeDialog.collectAsStateWithLifecycle()
+    val themeConfig by viewModel.themeConfig.collectAsStateWithLifecycle()
+
+    if (showThemeDialog) {
+        ThemeSettingsDialog(
+            onDismiss = { viewModel.setShowThemeDialog(false) },
+            currentThemeConfig = themeConfig,
+            onThemeConfigChange = {
+                viewModel.setThemeConfig(it)
+                viewModel.setShowThemeDialog(false)
+            }
+        )
+    }
 
     BackHandler(enabled = selectionMode) {
         viewModel.clearSelection()
@@ -77,19 +93,45 @@ fun NotesLandingScreen(
                         .padding(horizontal = CustomTheme.spacing.spacing16dp)
                         .height(CustomTheme.spacing.spacing48dp)
                         .clip(RoundedCornerShape(CustomTheme.spacing.spacing24dp))
-                        .background(CustomTheme.colors.BackgroundSecondary)
-                        .clickable { onSearchClicked() }
-                        .padding(horizontal = CustomTheme.spacing.spacing16dp),
+                        .background(CustomTheme.colors.BackgroundSecondary),
                     contentAlignment = Alignment.CenterStart
                 ) {
                     Row(
+                        modifier = Modifier.fillMaxWidth(),
                         verticalAlignment = Alignment.CenterVertically,
-                        horizontalArrangement = Arrangement.spacedBy(CustomTheme.spacing.spacing8dp)
+                        horizontalArrangement = Arrangement.SpaceBetween
                     ) {
-                        Text(
-                            text = "Search notes...",
-                            style = CustomTheme.typography.body1
-                        )
+                        Row(
+                            modifier = Modifier
+                                .weight(1f)
+                                .fillMaxHeight()
+                                .clip(RoundedCornerShape(CustomTheme.spacing.spacing24dp))
+                                .clickable { onSearchClicked() }
+                                .padding(start = CustomTheme.spacing.spacing16dp),
+                            verticalAlignment = Alignment.CenterVertically,
+                            horizontalArrangement = Arrangement.spacedBy(CustomTheme.spacing.spacing8dp)
+                        ) {
+                            Icon(
+                                imageVector = Icons.Default.Search,
+                                contentDescription = null,
+                                tint = CustomTheme.colors.FillPrimary40
+                            )
+                            Text(
+                                text = "Search notes...",
+                                style = CustomTheme.typography.body1
+                            )
+                        }
+
+                        IconButton(
+                            onClick = { viewModel.setShowThemeDialog(true) },
+                            modifier = Modifier.padding(end = CustomTheme.spacing.spacing4dp)
+                        ) {
+                            Icon(
+                                imageVector = Icons.Default.Settings,
+                                contentDescription = "Settings",
+                                tint = CustomTheme.colors.FillPrimary40
+                            )
+                        }
                     }
                 }
             }
